@@ -1,0 +1,159 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# API Credentials & Secrets (CRITICAL)
+config/api_credentials.yaml
+config/*credentials*
+config/*.key
+config/*.pem
+*.env
+.secrets/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+log/
+
+# Data Files (Raw & Processed)
+data/raw/
+data/processed/
+data/cache/
+*.csv
+*.json
+*.parquet
+*.h5
+*.hdf5
+
+# Machine Learning Models
+models/
+*.pkl
+*.joblib
+*.h5
+*.pb
+*.onnx
+checkpoints/
+weights/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Operating System
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node.js & React Frontend
+frontend/node_modules/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/build/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Package managers
+package-lock.json
+yarn.lock
+
+# Coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Documentation builds
+docs/_build/
+site/
+
+# Redis dump
+dump.rdb
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Config templates are kept, but not actual config files
+!config/*template*
+!config/*.example
+!config/*.sample
+
+# Keep important directories but ignore their contents
+data/raw/.gitkeep
+data/processed/.gitkeep
+models/.gitkeep
+logs/.gitkeep
