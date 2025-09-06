@@ -1,0 +1,119 @@
+# Database Configuration for Event-Driven Stock Trend Predictor
+
+# PostgreSQL Configuration
+postgresql:
+  host: "localhost"
+  port: 5432
+  database: "stock_predictor"
+  username: "postgres"
+  password: "shreshth"  # Change this!
+  
+  # Connection Pool Settings
+  pool_size: 10
+  max_overflow: 20
+  pool_timeout: 30
+  pool_recycle: 3600
+  
+  # Performance Settings
+  echo: false  # Set to true for SQL query debugging
+  pool_pre_ping: true
+
+# Redis Configuration (for caching)
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: null  # Set if Redis has password protection
+  
+  # Cache Settings
+  default_timeout: 900  # 15 minutes
+  max_connections: 50
+  socket_keepalive: true
+  socket_keepalive_options:
+    TCP_KEEPIDLE: 1
+    TCP_KEEPINTVL: 3
+    TCP_KEEPCNT: 5
+
+# Database Maintenance Settings
+maintenance:
+  # Automatic cleanup settings
+  cleanup_enabled: true
+  cleanup_schedule: "0 2 * * *"  # Daily at 2 AM
+  
+  # Data retention policies
+  retention_days:
+    predictions: 365  # Keep predictions for 1 year
+    training_logs: 90  # Keep training logs for 3 months
+    news_sentiment: 180  # Keep news sentiment for 6 months
+    price_data: -1  # Keep price data forever (-1 = no cleanup)
+  
+  # Backup settings
+  backup_enabled: false  # Set to true to enable automatic backups
+  backup_path: "/var/backups/stock_predictor/"
+  backup_retention_days: 30
+
+# Performance Monitoring
+monitoring:
+  # Query performance logging
+  slow_query_threshold: 1.0  # Log queries taking more than 1 second
+  log_queries: false  # Set to true for development
+  
+  # Connection monitoring
+  monitor_connections: true
+  max_connection_age: 3600  # 1 hour
+  
+  # Cache hit rate monitoring
+  monitor_cache_hits: true
+  target_cache_hit_rate: 0.85  # 85% target
+
+# Development vs Production Settings
+environment:
+  # Set to 'development' or 'production'
+  mode: "development"
+  
+  # Development specific settings
+  development:
+    echo_queries: true
+    detailed_logging: true
+    allow_drop_tables: true
+  
+  # Production specific settings  
+  production:
+    echo_queries: false
+    detailed_logging: false
+    allow_drop_tables: false
+    ssl_require: true
+    connection_timeout: 10
+
+# Table-specific configurations
+tables:
+  daily_prices:
+    # Partitioning settings for large datasets
+    enable_partitioning: false  # Set to true for very large datasets
+    partition_by: "month"  # 'month' or 'year'
+    
+  model_predictions:
+    # Automatic archiving of old predictions
+    auto_archive: true
+    archive_after_days: 90
+    
+  news_sentiment:
+    # Full-text search configuration
+    enable_full_text_search: true
+    search_language: "english"
+
+# Security Settings
+security:
+  # SSL Configuration
+  ssl_mode: "prefer"  # 'disable', 'allow', 'prefer', 'require'
+  ssl_cert: null
+  ssl_key: null
+  ssl_ca: null
+  
+  # Connection security
+  require_auth: true
+  max_connections_per_user: 10
+  
+  # Data encryption (for sensitive fields)
+  encrypt_sensitive_data: false  # Requires additional setup
+  encryption_key_path: null

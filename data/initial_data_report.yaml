@@ -1,0 +1,113 @@
+download_date: '2025-09-04T00:59:22.776733'
+stocks:
+  HDFCBANK:
+    adr_symbol: HDB
+    data:
+      adr:
+        avg_volume: 2033784
+        date_range: 2020-09-03 to 2025-09-03
+        missing_days: !!python/object/apply:numpy._core.multiarray.scalar
+        - &id001 !!python/object/apply:numpy.dtype
+          args:
+          - i8
+          - false
+          - true
+          state: !!python/tuple
+          - 3
+          - <
+          - null
+          - null
+          - null
+          - -1
+          - -1
+          - 0
+        - !!binary |
+          AAAAAAAAAAA=
+        price_range: $44.70 - $78.76
+        records: 1255
+      indian:
+        avg_volume: 25180797
+        date_range: 2020-09-03 to 2025-09-03
+        missing_days: !!python/object/apply:numpy._core.multiarray.scalar
+        - *id001
+        - !!binary |
+          AAAAAAAAAAA=
+        price_range: "\u20B9481.42 - \u20B91012.90"
+        records: 1239
+    indian_symbol: HDFCBANK.NS
+    sector: banking
+  ICICIBANK:
+    adr_symbol: IBN
+    data:
+      adr:
+        avg_volume: 6477947
+        date_range: 2020-09-03 to 2025-09-03
+        missing_days: !!python/object/apply:numpy._core.multiarray.scalar
+        - *id001
+        - !!binary |
+          AAAAAAAAAAA=
+        price_range: $8.99 - $34.14
+        records: 1255
+      indian:
+        avg_volume: 15715749
+        date_range: 2020-09-03 to 2025-09-03
+        missing_days: !!python/object/apply:numpy._core.multiarray.scalar
+        - *id001
+        - !!binary |
+          AAAAAAAAAAA=
+        price_range: "\u20B9324.68 - \u20B91477.20"
+        records: 1239
+    indian_symbol: ICICIBANK.NS
+    sector: banking
+  INFOSYS:
+    adr_symbol: INFY
+    data:
+      adr:
+        avg_volume: 9915867
+        date_range: 2018-09-04 to 2025-09-02
+        missing_days: !!python/object/apply:numpy._core.multiarray.scalar
+        - *id001
+        - !!binary |
+          AAAAAAAAAAA=
+        price_range: $6.05 - $23.85
+        records: 1758
+      indian:
+        avg_volume: 7769590
+        date_range: 2018-09-03 to 2025-09-03
+        missing_days: !!python/object/apply:numpy._core.multiarray.scalar
+        - *id001
+        - !!binary |
+          AAAAAAAAAAA=
+        price_range: "\u20B9461.91 - \u20B91971.95"
+        records: 1729
+    indian_symbol: INFY.NS
+    sector: it_services
+  RELIANCE:
+    adr_symbol: null
+    data:
+      indian:
+        avg_volume: 18855329
+        date_range: 2018-09-03 to 2025-09-03
+        missing_days: !!python/object/apply:numpy._core.multiarray.scalar
+        - *id001
+        - !!binary |
+          AAAAAAAAAAA=
+        price_range: "\u20B9395.48 - \u20B91589.14"
+        records: 1729
+    indian_symbol: RELIANCE.NS
+    sector: conglomerate
+  TATAMOTORS:
+    adr_symbol: TTM
+    data:
+      indian:
+        avg_volume: 25733556
+        date_range: 2020-09-03 to 2025-09-03
+        missing_days: !!python/object/apply:numpy._core.multiarray.scalar
+        - *id001
+        - !!binary |
+          AAAAAAAAAAA=
+        price_range: "\u20B9121.00 - \u20B91151.95"
+        records: 1239
+    indian_symbol: TATAMOTORS.NS
+    sector: automotive
+summary: {}

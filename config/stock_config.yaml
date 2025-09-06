@@ -1,0 +1,294 @@
+# Event-Driven Stock Trend Predictor - Stock Configuration
+# 5 Data-Rich Indian Stocks Configuration
+
+stocks:
+  HDFCBANK:
+    name: "HDFC Bank Limited"
+    indian_symbol: "HDFCBANK.NS"
+    adr_symbol: "HDB"
+    sector: "banking"
+    market_cap_rank: 1
+    exchange: "NSE"
+    currency: "INR"
+    
+    # Macro economic factors that influence this stock
+    macro_factors:
+      - repo_rate          # RBI repo rate
+      - cpi_inflation      # Consumer Price Index
+      - inr_usd_rate      # INR/USD exchange rate
+      - credit_growth     # Bank credit growth
+      - banking_index     # Bank Nifty index
+      - gdp_growth        # India GDP growth
+    
+    # Keywords for news sentiment analysis
+    news_keywords:
+      - "HDFC Bank"
+      - "private banking"
+      - "RBI policy"
+      - "interest rates"
+      - "banking sector"
+      - "credit growth"
+      - "NPA"
+      - "digital banking"
+    
+    # Training and prediction configuration
+    training_lookback: "5y"
+    min_data_points: 1000
+    prediction_horizons: ["1d", "3d", "1w", "1m"]
+    
+    # Model weights for ensemble
+    model_weights:
+      lstm_weight: 0.4
+      xgboost_weight: 0.3
+      macro_weight: 0.3
+    
+    # Risk parameters
+    volatility_threshold: 0.03
+    max_position_size: 0.25
+    
+  ICICIBANK:
+    name: "ICICI Bank Limited"
+    indian_symbol: "ICICIBANK.NS"
+    adr_symbol: "IBN"
+    sector: "banking"
+    market_cap_rank: 2
+    exchange: "NSE"
+    currency: "INR"
+    
+    macro_factors:
+      - repo_rate
+      - cpi_inflation
+      - inr_usd_rate
+      - capex_cycle        # Corporate capital expenditure
+      - banking_index
+      - corporate_earnings
+    
+    news_keywords:
+      - "ICICI Bank"
+      - "corporate banking"
+      - "loan growth"
+      - "retail banking"
+      - "digital transformation"
+      - "banking technology"
+    
+    training_lookback: "5y"
+    min_data_points: 1000
+    prediction_horizons: ["1d", "3d", "1w", "1m"]
+    
+    model_weights:
+      lstm_weight: 0.4
+      xgboost_weight: 0.3
+      macro_weight: 0.3
+    
+    volatility_threshold: 0.03
+    max_position_size: 0.25
+    
+  INFOSYS:
+    name: "Infosys Limited"
+    indian_symbol: "INFY.NS"
+    adr_symbol: "INFY"
+    sector: "it_services"
+    market_cap_rank: 3
+    exchange: "NSE"
+    currency: "INR"
+    
+    macro_factors:
+      - usd_inr_rate      # Primary factor for IT services
+      - nasdaq_index      # US tech market sentiment
+      - us_gdp_growth     # US economic health
+      - it_spending_growth # Global IT spending
+      - h1b_visa_policy   # US immigration policy
+      - dollar_index      # DXY index
+    
+    news_keywords:
+      - "Infosys"
+      - "IT services"
+      - "digital transformation"
+      - "US recession"
+      - "technology spending"
+      - "outsourcing"
+      - "AI consulting"
+      - "cloud services"
+    
+    training_lookback: "7y"  # Longer history for IT cyclical patterns
+    min_data_points: 1200
+    prediction_horizons: ["1d", "3d", "1w", "1m"]
+    
+    model_weights:
+      lstm_weight: 0.6      # Higher weight on price patterns
+      xgboost_weight: 0.2
+      currency_weight: 0.2   # USD/INR is crucial
+    
+    volatility_threshold: 0.04  # Higher volatility tolerance
+    max_position_size: 0.30
+    
+  TATAMOTORS:
+    name: "Tata Motors Limited"
+    indian_symbol: "TATAMOTORS.NS"
+    adr_symbol: "TTM"
+    sector: "automotive"
+    market_cap_rank: 4
+    exchange: "NSE"
+    currency: "INR"
+    
+    macro_factors:
+      - steel_prices      # Raw material cost
+      - crude_oil_price   # Input cost and logistics
+      - gbp_usd_rate     # JLR exposure to UK market
+      - auto_sales_growth # Domestic auto demand
+      - ev_policy        # Electric vehicle policies
+      - interest_rates   # Auto loan rates
+    
+    news_keywords:
+      - "Tata Motors"
+      - "JLR"
+      - "Jaguar Land Rover"
+      - "electric vehicles"
+      - "EV"
+      - "auto sales"
+      - "commercial vehicles"
+      - "passenger cars"
+    
+    training_lookback: "5y"
+    min_data_points: 1000
+    prediction_horizons: ["1d", "3d", "1w", "1m"]
+    
+    model_weights:
+      lstm_weight: 0.3
+      xgboost_weight: 0.3
+      commodity_weight: 0.4  # High commodity sensitivity
+    
+    volatility_threshold: 0.05  # Most volatile of the 5 stocks
+    max_position_size: 0.20
+    
+  RELIANCE:
+    name: "Reliance Industries Limited"
+    indian_symbol: "RELIANCE.NS"
+    adr_symbol: null  # No ADR listing
+    sector: "conglomerate"
+    market_cap_rank: 5
+    exchange: "NSE"
+    currency: "INR"
+    
+    macro_factors:
+      - brent_crude_price    # Oil & petrochemicals
+      - inr_usd_rate        # Import/export exposure
+      - telecom_policy      # Jio business
+      - retail_consumption  # Retail business
+      - energy_transition   # Green energy initiatives
+      - natural_gas_prices  # Petrochemical inputs
+    
+    news_keywords:
+      - "Reliance Industries"
+      - "RIL"
+      - "Jio"
+      - "petrochemicals"
+      - "renewable energy"
+      - "retail"
+      - "oil refining"
+      - "digital services"
+    
+    training_lookback: "7y"  # Long history for multi-sector analysis
+    min_data_points: 1200
+    prediction_horizons: ["1d", "3d", "1w", "1m"]
+    
+    model_weights:
+      lstm_weight: 0.5
+      xgboost_weight: 0.3
+      multi_factor_weight: 0.2  # Multiple sector exposure
+    
+    volatility_threshold: 0.03
+    max_position_size: 0.30  # Large, liquid stock
+
+# Sector groupings for correlation analysis
+sector_correlations:
+  banking: ["HDFCBANK", "ICICIBANK"]
+  it_services: ["INFOSYS"]
+  automotive: ["TATAMOTORS"]
+  conglomerate: ["RELIANCE"]
+
+# Market hours configuration
+market_hours:
+  nse_bse:
+    start: "09:15"
+    end: "15:30"
+    timezone: "Asia/Kolkata"
+    pre_market_start: "09:00"
+    post_market_end: "16:00"
+  
+  us_markets:
+    start: "09:30"
+    end: "16:00"
+    timezone: "America/New_York"
+    pre_market_start: "04:00"
+    post_market_end: "20:00"
+
+# Data collection settings
+data_collection:
+  # How often to update data during market hours
+  update_frequency_minutes: 5
+  
+  # Batch size for historical data downloads
+  batch_size_days: 100
+  
+  # Data sources priority (1 = highest)
+  source_priority:
+    yfinance: 1
+    alpha_vantage: 2
+  
+  # Cache settings
+  cache_duration_minutes: 15
+  max_cache_size_mb: 500
+
+# Model training settings
+training_settings:
+  # Minimum accuracy threshold to deploy model
+  min_accuracy_threshold: 0.65
+  
+  # Cross-validation settings
+  cv_folds: 5
+  test_size: 0.2
+  
+  # Training frequency
+  retrain_frequency_days: 7
+  
+  # Model validation metrics
+  required_metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1_score
+    - sharpe_ratio
+
+# Alert thresholds
+alert_thresholds:
+  trend_change_confidence: 0.75
+  high_volatility_threshold: 0.05
+  volume_spike_multiplier: 2.0
+  news_sentiment_threshold: 0.7
+
+# Feature engineering parameters
+feature_engineering:
+  # Technical indicators
+  technical_indicators:
+    sma_periods: [5, 10, 20, 50, 100, 200]
+    ema_periods: [12, 26, 50]
+    rsi_period: 14
+    macd_fast: 12
+    macd_slow: 26
+    macd_signal: 9
+    bollinger_period: 20
+    bollinger_std: 2
+  
+  # Sentiment analysis
+  sentiment_analysis:
+    news_weight: 0.6
+    social_media_weight: 0.4
+    sentiment_decay_days: 3
+  
+  # Macro factor weights by sector
+  macro_weights:
+    banking: 0.4
+    it_services: 0.3
+    automotive: 0.5
+    conglomerate: 0.3
