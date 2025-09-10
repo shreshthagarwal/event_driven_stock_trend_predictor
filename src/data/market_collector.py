@@ -123,6 +123,51 @@ class MarketDataCollector:
         # For now, return empty DataFrame
         logger.info("Alpha Vantage integration not implemented yet")
         return pd.DataFrame()
+
+    def update_daily_prices(self, symbol: str) -> str:
+        """
+        Efficiently updates stock data by fetching only new records.
+        It loads existing data, finds the last date, and appends new data since then.
+        """
+        stock_key = symbol.split('.')[0]
+        file_path = self.data_dir / stock_key / f"{stock_key}_indian_historical.csv"
+        
+        start_date = None
+        if file_path.exists():
+            try:
+                existing_df = pd.read_csv(file_path, index_col='Date', parse_dates=True)
+                if not existing_df.empty:
+                    last_date = existing_df.index.max()
+                    start_date = last_date + timedelta(days=1)
+            except Exception as e:
+                return f"Error reading existing data for {symbol}: {e}"
+
+        try:
+            if start_date and start_date.date() >= datetime.today().date():
+                return f"Data for {symbol} is already up to date."
+        
+            self._rate_limit('yfinance')
+            ticker = yf.Ticker(symbol)
+            # Fetch data from the day after the last recorded date up to the present
+            new_data = ticker.history(start=start_date, period=None)
+            
+            if new_data.empty:
+                return f"No new data found for {symbol} since {start_date.strftime('%Y-%m-%d') if start_date else 'the beginning'}."
+
+            # Append new data to the existing dataframe
+            if 'existing_df' in locals() and not existing_df.empty:
+                updated_df = pd.concat([existing_df, new_data])
+            else:
+                updated_df = new_data
+            
+            # Standardize column names and save the updated file
+            updated_df.rename(columns={'Open': 'open', 'High': 'high', 'Low': 'low', 'Close': 'close', 'Volume': 'volume'}, inplace=True)
+            updated_df['symbol'] = symbol
+            self.save_data(updated_df, stock_key, 'indian')
+            return f"Added {len(new_data)} new records for {symbol}."
+        
+        except Exception as e:
+            return f"Error fetching new data for {symbol}: {e}"        
     
     def collect_dual_market_data(self, stock_name: str) -> Dict[str, pd.DataFrame]:
         """

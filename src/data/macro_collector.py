@@ -439,6 +439,38 @@ class MacroEconomicDataCollector:
         results['rbi_data'] = rbi_count
         
         return results
+
+    def update_all_macro_data(self, days: int = 7) -> str:
+        """
+        Efficiently updates all macro data sources for the last few days.
+        Renamed from collect_all_macro_data for clarity in automation.
+        """
+        summary = []
+        summary.append("Updating comprehensive macro economic data...")
+        
+        # Collect currency data for USDINR
+        summary.append("-> Updating currency data...")
+        self.collect_currency_data('USDINR', days)
+        time.sleep(15) # Respect Alpha Vantage rate limit (5 calls per minute)
+        
+        # Collect key commodity data
+        summary.append("-> Updating commodity data...")
+        for commodity_code in ['BRENTOIL', 'WTI', 'GOLD']:
+            self.collect_commodity_data(commodity_code, days)
+            time.sleep(15)
+        
+        # Collect key global index data
+        summary.append("-> Updating global index data...")
+        for index_code in ['SPX', 'IXIC']: # S&P 500 and NASDAQ
+            self.collect_global_index_data(index_code, days)
+            time.sleep(15)
+        
+        # Store/update RBI rates (idempotent)
+        summary.append("-> Storing RBI policy rates...")
+        self.store_rbi_rates()
+        
+        return "\n".join(summary)
+        
     
     def get_macro_features_for_stock(self, stock_symbol: str, date: str = None) -> Dict:
         """Get macro features for a specific stock and date"""

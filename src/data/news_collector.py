@@ -9,7 +9,7 @@ import numpy as np
 from datetime import datetime, timedelta
 import time
 import yaml
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 import sqlite3
 import os
 
@@ -187,6 +187,27 @@ class IndianFinancialNewsCollector:
             unique_articles.append(article)
         
         return sorted(unique_articles, key=lambda x: x.get('publishedAt', ''), reverse=True)
+
+    def refresh_stock_news(self, stock_symbol: str, keywords: List[str], days: int = 4) -> Tuple[int, int]:
+        """
+        Deletes old news for a stock and fetches fresh articles for the past few days.
+        This is the recommended method for daily updates.
+        """
+        # 1. Delete old articles (e.g., older than 14 days) to keep DB clean
+        cutoff_date = (datetime.now() - timedelta(days=14)).strftime('%Y-%m-%d')
+        deleted_count = 0
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute("""
+                DELETE FROM news_articles 
+                WHERE stock_symbol = ? AND date(published_at) < date(?)
+            """, (stock_symbol, cutoff_date))
+            deleted_count = cursor.rowcount
+
+        # 2. Collect new articles for the recent period
+        new_articles = self._collect_from_newsapi(keywords, days)
+        stored_count = self._store_articles(stock_symbol, new_articles, keywords)
+        
+        return deleted_count, stored_count
     
     def _store_articles(self, stock_symbol: str, articles: List[Dict], keywords: List[str]) -> int:
         """Store articles in database, avoiding duplicates"""

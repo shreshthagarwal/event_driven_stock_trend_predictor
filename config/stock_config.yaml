@@ -1,5 +1,5 @@
-# Event-Driven Stock Trend Predictor - Stock Configuration
-# 5 Data-Rich Indian Stocks Configuration
+# Event-Driven Stock Trend Predictor - Master Configuration
+# This file combines a detailed system structure with enhanced, targeted news queries.
 
 stocks:
   HDFCBANK:
@@ -15,21 +15,17 @@ stocks:
     macro_factors:
       - repo_rate          # RBI repo rate
       - cpi_inflation      # Consumer Price Index
-      - inr_usd_rate      # INR/USD exchange rate
-      - credit_growth     # Bank credit growth
-      - banking_index     # Bank Nifty index
-      - gdp_growth        # India GDP growth
+      - inr_usd_rate       # INR/USD exchange rate
+      - credit_growth      # Bank credit growth
+      - banking_index      # Bank Nifty index
+      - gdp_growth         # India GDP growth
     
-    # Keywords for news sentiment analysis
+    # ENHANCED Keywords for news sentiment analysis to improve relevance
     news_keywords:
-      - "HDFC Bank"
-      - "private banking"
-      - "RBI policy"
-      - "interest rates"
-      - "banking sector"
-      - "credit growth"
-      - "NPA"
-      - "digital banking"
+      - '"HDFC Bank" AND ("earnings" OR "profit" OR "loan growth" OR "NPA" OR "quarterly results")'
+      - '"private banking sector" AND "India"'
+      - '"RBI policy" AND "interest rates"'
+      - '"credit growth" AND "India"'
     
     # Training and prediction configuration
     training_lookback: "5y"
@@ -59,17 +55,16 @@ stocks:
       - repo_rate
       - cpi_inflation
       - inr_usd_rate
-      - capex_cycle        # Corporate capital expenditure
+      - capex_cycle          # Corporate capital expenditure
       - banking_index
       - corporate_earnings
     
+    # ENHANCED Keywords for news sentiment analysis
     news_keywords:
-      - "ICICI Bank"
-      - "corporate banking"
-      - "loan growth"
-      - "retail banking"
-      - "digital transformation"
-      - "banking technology"
+      - '"ICICI Bank" AND ("earnings" OR "profit" OR "loan growth" OR "NPA" OR "quarterly results")'
+      - '"private banking sector" AND "India"'
+      - '"RBI policy" AND "interest rates"'
+      - '"digital banking" AND "India"'
     
     training_lookback: "5y"
     min_data_points: 1000
@@ -93,29 +88,26 @@ stocks:
     currency: "INR"
     
     macro_factors:
-      - usd_inr_rate      # Primary factor for IT services
-      - nasdaq_index      # US tech market sentiment
-      - us_gdp_growth     # US economic health
+      - usd_inr_rate       # Primary factor for IT services
+      - nasdaq_index       # US tech market sentiment
+      - us_gdp_growth      # US economic health
       - it_spending_growth # Global IT spending
-      - h1b_visa_policy   # US immigration policy
-      - dollar_index      # DXY index
+      - h1b_visa_policy    # US immigration policy
+      - dollar_index       # DXY index
     
+    # ENHANCED Keywords for news sentiment analysis
     news_keywords:
-      - "Infosys"
-      - "IT services"
-      - "digital transformation"
-      - "US recession"
-      - "technology spending"
-      - "outsourcing"
-      - "AI consulting"
-      - "cloud services"
+      - '"Infosys" AND ("earnings" OR "revenue" OR "guidance" OR "deal win" OR "attrition")'
+      - '"Indian IT services" AND ("hiring" OR "forecast" OR "USD")'
+      - '"NASSCOM report"'
+      - '"global tech spending"'
     
     training_lookback: "7y"  # Longer history for IT cyclical patterns
     min_data_points: 1200
     prediction_horizons: ["1d", "3d", "1w", "1m"]
     
     model_weights:
-      lstm_weight: 0.6      # Higher weight on price patterns
+      lstm_weight: 0.6       # Higher weight on price patterns
       xgboost_weight: 0.2
       currency_weight: 0.2   # USD/INR is crucial
     
@@ -132,22 +124,19 @@ stocks:
     currency: "INR"
     
     macro_factors:
-      - steel_prices      # Raw material cost
-      - crude_oil_price   # Input cost and logistics
-      - gbp_usd_rate     # JLR exposure to UK market
-      - auto_sales_growth # Domestic auto demand
-      - ev_policy        # Electric vehicle policies
-      - interest_rates   # Auto loan rates
+      - steel_prices       # Raw material cost
+      - crude_oil_price    # Input cost and logistics
+      - gbp_usd_rate       # JLR exposure to UK market
+      - auto_sales_growth  # Domestic auto demand
+      - ev_policy          # Electric vehicle policies
+      - interest_rates     # Auto loan rates
     
+    # ENHANCED Keywords for news sentiment analysis
     news_keywords:
-      - "Tata Motors"
-      - "JLR"
-      - "Jaguar Land Rover"
-      - "electric vehicles"
-      - "EV"
-      - "auto sales"
-      - "commercial vehicles"
-      - "passenger cars"
+      - '"Tata Motors" AND ("sales" OR "JLR" OR "electric vehicle" OR "EV" OR "launches")'
+      - '"Indian auto sales"'
+      - '"commodity prices" AND "steel" OR "aluminum"'
+      - '"semiconductor shortage"'
     
     training_lookback: "5y"
     min_data_points: 1000
@@ -172,21 +161,18 @@ stocks:
     
     macro_factors:
       - brent_crude_price    # Oil & petrochemicals
-      - inr_usd_rate        # Import/export exposure
-      - telecom_policy      # Jio business
-      - retail_consumption  # Retail business
-      - energy_transition   # Green energy initiatives
-      - natural_gas_prices  # Petrochemical inputs
+      - inr_usd_rate         # Import/export exposure
+      - telecom_policy       # Jio business
+      - retail_consumption   # Retail business
+      - energy_transition    # Green energy initiatives
+      - natural_gas_prices   # Petrochemical inputs
     
+    # ENHANCED Keywords for news sentiment analysis
     news_keywords:
-      - "Reliance Industries"
-      - "RIL"
-      - "Jio"
-      - "petrochemicals"
-      - "renewable energy"
-      - "retail"
-      - "oil refining"
-      - "digital services"
+      - '"Reliance Industries" AND ("earnings" OR "Jio" OR "Retail" OR "O2C" OR "AGM")'
+      - '"Aramco deal"'
+      - '"crude oil prices" AND "GRM"'
+      - '"Indian telecom"'
     
     training_lookback: "7y"  # Long history for multi-sector analysis
     min_data_points: 1200
@@ -292,3 +278,4 @@ feature_engineering:
     it_services: 0.3
     automotive: 0.5
     conglomerate: 0.3
+
